@@ -10,6 +10,9 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: .
 
     steps:
       - name: Checkout code
@@ -20,7 +23,8 @@ jobs:
         with:
           java-version: '17'
           distribution: 'temurin'
-          cache: 'gradle'
+          # Removed cache: 'gradle' because it's failing to find files in the root
+          # We will handle caching manually or skip it for now to ensure the build passes
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
